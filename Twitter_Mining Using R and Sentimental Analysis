@@ -1,0 +1,55 @@
+                              TWITTER MINING  USING R
+1.Twitter Mining
+/*personal details about the twitter developer manager account
+#Consumer Key (API Key)	*********************
+#Consumer Secret (API Secret)	*****************************
+#Acess Access Token Secret	**************************************
+#owner id details)
+#Name:"your name"
+#website-https://www.google.co.in
+#username(email id):"your id"
+#Owner ID	************
+*/
+Project code:
+Open R workspace:create a new file
+#install.packages("twitteR")
+#install.packages("Rcurl")
+# install.packages("ROAuth")
+#install.packages("bitops")
+#require(twitteR)    #to load the installed package
+#require(RCurl)      #to load the installed package
+#consumer_key<-'your key'
+#consumer_secret<-'your secret'
+#access_token<-'your access token'
+#access_secret<-'your access secret'
+#setup_twitter_oauth(consumer_key,consumer_secret,access_token,access_secret)
+#1-yes configuration
+#2-no configuration
+#LFC_tweets<-searchTwitter("LFC",n=10,lang="en")
+#LFC_tweets
+2.WordCloud
+> install.packages("tm")
+> require("tm")
+> himearth<-searchTwitter('earthquake+himalaya',lang="en",n=50,resultType="recent")
+> himearth<-searchTwitter('earthquake+himalaya',lang="en",n=500,resultType="recent")
+> class(himearth)
+> himearth_text<-sapply(himearth,function(x) x$getText())
+> str(himearth_text)
+
+
+> him_corpus<-Corpus(VectorSource(himearth_text))
+> him_corpus
+
+> inspect(him_corpus[1])
+> him_clean<-tm_map(him_corpus, removePunctuation)
+> him_clean<-tm_map(him_clean,content_transformer(tolower))
+> him_clean<-tm_map(him_clean,removeWords,stopwords("english"))
+> him_clean<-tm_map(him_clean,removeNumbers)
+> him_clean<-tm_map(him_clean,stripWhitespace)
+> him_clean<-tm_map(him_clean,removeWords,c("himalaya","earthquake"))
+> install.packages("wordcloud")
+> require(wordcloud)
+> wordcloud(him_clean)
+ 
+
+                                *******************************************
